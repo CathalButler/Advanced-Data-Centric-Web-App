@@ -9,11 +9,13 @@ import com.sales.services.LoanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -50,10 +52,15 @@ public class mainController {
     Redirect /showBooks
      */
     @RequestMapping(value = "/addBook", method = RequestMethod.POST)
-    public String addBookPost(@ModelAttribute("book") Book book) {
-        System.out.println("Book title: " + book.getTitle());
-        bs.save(book);
-        return "redirect:showBooks";
+    public String addBookPost(@Valid @ModelAttribute("book") Book book, BindingResult result) {
+        // If input has an error, return to addBook page
+        if (result.hasErrors()) {
+            return "addCustomer";
+        } else {// End if
+            System.out.println("Book title: " + book.getTitle());
+            bs.save(book);
+            return "redirect:showBooks";
+        }
     }
 
     /*
@@ -67,8 +74,6 @@ public class mainController {
         List<Book> books = (List<Book>) bs.getBooks();
         // Create objects from model book and all to the array list
         m.addAttribute("books", books);
-        System.out.println(books.size());
-
         return "showBooks";
     }// End getBooks method
 
@@ -94,10 +99,15 @@ public class mainController {
   Redirect /showCustomers
    */
     @RequestMapping(value = "/addCustomer", method = RequestMethod.POST)
-    public String addCustomerPost(@ModelAttribute("customer") Customer customer) {
-        System.out.println("Customer name: " + customer.getcName());
-        cs.save(customer);
-        return "redirect:showCustomers";
+    public String addCustomerPost(@Valid @ModelAttribute("customer") Customer customer, BindingResult result) {
+        // If input has an error, return to addCustomer page
+        if (result.hasErrors()) {
+            return "addCustomer";
+        } else {// End if
+            System.out.println("Customer name: " + customer.getcName());
+            cs.save(customer);
+            return "redirect:showCustomers";
+        }
     }
 
     /*
@@ -109,9 +119,10 @@ public class mainController {
     public String getCustomers(Model m) {
         // List of book objects
         List<Customer> customers = (List<Customer>) cs.getCustomers();
+
         // Create objects from model book and all to the array list
         m.addAttribute("customers", customers);
-        System.out.println(customers.size());
+        //Create objects from model loan and add to the array list
 
         return "showCustomers";
     }// End getBooks method
@@ -137,10 +148,15 @@ public class mainController {
   Redirect /showCustomers
    */
     @RequestMapping(value = "/newLoan", method = RequestMethod.POST)
-    public String addLoanPost(@ModelAttribute("loan") Loan loan) {
-        ls.save(loan);
-        return "redirect:showLoans";
-    }
+    public String addLoanPost(@ModelAttribute("loan") Loan loan, BindingResult result) {
+        // If input has an error, return to newLoan page
+        if (result.hasErrors()) {
+            return "addCustomer";
+        } else {// End if
+            ls.save(loan);
+            return "redirect:showLoans";
+        }// End if else
+    }// End method
 
 
     /*
@@ -154,7 +170,6 @@ public class mainController {
         List<Loan> loans = (List<Loan>) ls.getLoans();
         // Create objects from model book and all to the array list
         m.addAttribute("loans", loans);
-        System.out.println(loans.size());
 
         return "showLoans";
     }// End getBooks method

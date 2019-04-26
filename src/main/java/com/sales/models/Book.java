@@ -72,5 +72,5 @@ public class Book {
 	public void setLoans(List<Loan> loans) {
 		this.loans = loans;
 	}
-	
+
 }

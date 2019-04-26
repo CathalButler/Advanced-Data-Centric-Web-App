@@ -10,22 +10,38 @@
 </head>
 <body>
 <h1>List of Customer</h1>
-<table>
-    <tr>
-        <th>Customer ID</th>
-        <th>Customer Name</th>
-        <th>Loan Period</th>
-    </tr>
-    <tr>
-        <c:forEach items="${customers}" var="customer">
-    <tr>
-        <td>${customer.cId}</td>
-        <td>${customer.cName}</td>
-        <td>${customer.loanPeriod}</td>
-    </tr>
-    </c:forEach>
-    </tr>
-</table>
+<!-- Loop for all customer data -->
+<c:forEach items="${customers}" var="customer">
+
+    <!-- Customer ID and Name -->
+    <h3>${customer.cId} ${customer.cName}</h3>
+    <!-- Customer Loan Period -->
+    <p>Loan Period = ${customer.loanPeriod}</p>
+
+    <table>
+        <!-- Table headings -->
+        <tr>
+            <th>Loan ID</th>
+            <th>Book ID</th>
+            <th>Title</th>
+            <th>Author</th>
+        </tr>
+        <!-- Table Data -->
+        <!-- Loop for all loan data -->
+        <c:forEach items="${customer.loans}" var="loan">
+            <tr>
+                <td>${loan.lid}</td>
+                <td>${loan.book.bid}</td>
+                <td>${loan.book.title}</td>
+                <td>${loan.book.author}</td>
+            </tr>
+            <!--End loop for loans data -->
+        </c:forEach>
+    </table>
+</c:forEach>
+<!--End loop for customer data -->
+
+<!-- Narration Links -->
 <a href="/">Home</a>
 <a href="/addBook">Add Book</a>
 <a href="/showCustomers">List Customers</a>
