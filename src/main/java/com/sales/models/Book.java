@@ -11,6 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="BOOKS")
@@ -21,12 +22,12 @@ public class Book {
 	private Long bid;
 		
 	@Column(name="TITLE")
-	@NotBlank
+	@NotEmpty(message = "may not be empty")
 	private String title;
 		
 		
 	@Column(name="AUTHOR")
-	@NotBlank
+	@NotEmpty(message = "may not be empty")
 	private String author;
 
 	

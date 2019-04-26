@@ -19,7 +19,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@SessionAttributes({"books", "customers", "loans"})
+@SessionAttributes({"book", "customer", "loan"})
 public class mainController {
     // Autowire for Services
     @Autowired
@@ -55,7 +55,7 @@ public class mainController {
     public String addBookPost(@Valid @ModelAttribute("book") Book book, BindingResult result) {
         // If input has an error, return to addBook page
         if (result.hasErrors()) {
-            return "addCustomer";
+            return "addBook";
         } else {// End if
             System.out.println("Book title: " + book.getTitle());
             bs.save(book);
@@ -148,10 +148,10 @@ public class mainController {
   Redirect /showCustomers
    */
     @RequestMapping(value = "/newLoan", method = RequestMethod.POST)
-    public String addLoanPost(@ModelAttribute("loan") Loan loan, BindingResult result) {
+    public String addLoanPost(@Valid @ModelAttribute("loan") Loan loan, BindingResult result) {
         // If input has an error, return to newLoan page
         if (result.hasErrors()) {
-            return "addCustomer";
+            return "newLoan";
         } else {// End if
             ls.save(loan);
             return "redirect:showLoans";

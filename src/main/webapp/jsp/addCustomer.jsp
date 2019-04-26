@@ -8,7 +8,7 @@
     <title>Insert Customer information here</title>
 </head>
 <body>
-<form:form modelAttribute="customer">
+<form:form modelAttribute="customer"  method="POST" acceptCharset="UTF-8">
     <table>
         <tr>
             <td>Customer name</td>
