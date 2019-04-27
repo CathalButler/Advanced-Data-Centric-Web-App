@@ -20,16 +20,16 @@ import java.util.List;
 
 @Controller
 @SessionAttributes({"book", "customer", "loan"})
-public class mainController {
+public class MainController {
     // Autowire for Services
     @Autowired
-    BookService bs;
+    BookService bookService;
 
     @Autowired
-    CustomerService cs;
+    CustomerService customerService;
 
     @Autowired
-    LoanService ls;
+    LoanService loanService;
 
 
     // == Book Methods ==============================================================
@@ -39,9 +39,9 @@ public class mainController {
     Return addBook page
      */
     @RequestMapping(value = "/addBook", method = RequestMethod.GET)
-    public String addBook(Model m) {
+    public String addBook(Model model) {
         Book book = new Book();
-        m.addAttribute("book", book);
+        model.addAttribute("book", book);
         System.out.println("Book Title: " + book.getTitle());
         return "addBook";
     }
@@ -58,7 +58,7 @@ public class mainController {
             return "addBook";
         } else {// End if
             System.out.println("Book title: " + book.getTitle());
-            bs.save(book);
+            bookService.save(book);
             return "redirect:showBooks";
         }
     }
@@ -69,11 +69,11 @@ public class mainController {
     return /showBooks
      */
     @RequestMapping(value = "/showBooks")
-    public String getBooks(Model m) {
+    public String getBooks(Model model) {
         // List of book objects
-        List<Book> books = (List<Book>) bs.getBooks();
+        List<Book> books = (List<Book>) bookService.getBooks();
         // Create objects from model book and all to the array list
-        m.addAttribute("books", books);
+        model.addAttribute("books", books);
         return "showBooks";
     }// End getBooks method
 
@@ -86,9 +86,9 @@ public class mainController {
    Return addBook page
     */
     @RequestMapping(value = "/addCustomer", method = RequestMethod.GET)
-    public String addCustomer(Model m) {
+    public String addCustomer(Model model) {
         Customer customer = new Customer();
-        m.addAttribute("customer", customer);
+        model.addAttribute("customer", customer);
         System.out.println("Customer name: " + customer.getcName());
         return "addCustomer";
     }
@@ -105,7 +105,7 @@ public class mainController {
             return "addCustomer";
         } else {// End if
             System.out.println("Customer name: " + customer.getcName());
-            cs.save(customer);
+            customerService.save(customer);
             return "redirect:showCustomers";
         }
     }
@@ -118,7 +118,7 @@ public class mainController {
     @RequestMapping(value = "/showCustomers")
     public String getCustomers(Model m) {
         // List of book objects
-        List<Customer> customers = (List<Customer>) cs.getCustomers();
+        List<Customer> customers = (List<Customer>) customerService.getCustomers();
 
         // Create objects from model book and all to the array list
         m.addAttribute("customers", customers);
@@ -136,9 +136,9 @@ public class mainController {
   Return newLoan page
    */
     @RequestMapping(value = "/newLoan", method = RequestMethod.GET)
-    public String addLoan(Model m) {
+    public String addLoan(Model model) {
         Loan loan = new Loan();
-        m.addAttribute("loan", loan);
+        model.addAttribute("loan", loan);
         return "newLoan";
     }
 
@@ -153,7 +153,7 @@ public class mainController {
         if (result.hasErrors()) {
             return "newLoan";
         } else {// End if
-            ls.save(loan);
+            loanService.save(loan);
             return "redirect:showLoans";
         }// End if else
     }// End method
@@ -165,14 +165,30 @@ public class mainController {
   return /showCustomers
    */
     @RequestMapping(value = "/showLoans")
-    public String getLoans(Model m) {
+    public String getLoans(Model model) {
         // List of book objects
-        List<Loan> loans = (List<Loan>) ls.getLoans();
+        List<Loan> loans = (List<Loan>) loanService.getLoans();
         // Create objects from model book and all to the array list
-        m.addAttribute("loans", loans);
+        model.addAttribute("loans", loans);
 
         return "showLoans";
     }// End getBooks method
 
+    @RequestMapping(value = "/deleteLoan", method = RequestMethod.GET)
+    public String getDeleteLoan(Model m) {
+        Loan loan = new Loan();
+        m.addAttribute("loan", loan);
+        return "deleteLoan";
+    }
 
+    @RequestMapping(value = "/deleteLoan", method = RequestMethod.POST)
+    public String deleteLoan(@Valid @ModelAttribute("loan") Loan loan, BindingResult result) {
+        // If input has an error, return to newLoan page
+        if (result.hasErrors()) {
+            return "newLoan"; //return to a new page if error
+        } else {// End if
+            loanService.deleteLoan(loan);
+            return "redirect:showLoans";
+        }// End if else
+    }// End method
 }// End main controller class

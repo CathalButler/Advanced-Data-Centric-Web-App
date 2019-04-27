@@ -1,33 +1,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1" %>
 <!DOCTYPE html>
 <html>
 
 <head>
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="/css/table.css">
     <meta charset="ISO-8859-1">
     <title>ADCWA Final Project</title>
 </head>
 <body>
-<h1>List of Books</h1>
-<table>
-    <tr>
-        <th>Book ID</th>
-        <th>Title</th>
-        <th>Author</th>
-    </tr>
-    <tr>
-        <c:forEach items="${books}" var="book">
-    <tr>
-        <td>${book.bid}</td>
-        <td>${book.title}</td>
-        <td>${book.author}</td>
-    </tr>
-    </c:forEach>
-    </tr>
-</table>
+<form:form modelAttribute="loan" method="POST" acceptCharset="UTF-8">
+    <h3>Delete Loan</h3>
+    <td>Loan ID: <form:input path="lid"></form:input></td>
+    <td colspan="2"><input type="submit" value="Add" /></td>
+</form:form>
+
 <a href="/">Home</a>
 <a href="/addBook">Add Book</a>
 <a href="/showCustomers">List Customers</a>

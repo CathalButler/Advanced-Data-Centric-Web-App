@@ -1,71 +1,65 @@
 package com.sales.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table(name="LOANS")
+@Table(name = "LOANS")
 public class Loan {
-	@Id
-	@GeneratedValue
-	@Column(name="LID")
-	private Long lid;
-	
-	@ManyToOne
-	@JoinColumn(name="BID", unique=true)
-	private Book book;
+    @Id
+    @GeneratedValue
+    @Column(name = "LID")
+    private Long lid;
 
-	@ManyToOne
-	@JoinColumn(name="CID")
-	private Customer cust;
-	
-	
-	@Column(name="DUEDATE")
-	private String dueDate;
+    @ManyToOne
+    @JoinColumn(name = "BID", unique = true)
+    private Book book;
+
+    @ManyToOne
+    @JoinColumn(name = "CID")
+    private Customer cust;
 
 
-	public Long getLid() {
-		return lid;
-	}
+    @Column(name = "DUEDATE")
+    private String dueDate;
 
 
-	public void setLid(Long lid) {
-		this.lid = lid;
-	}
+    public Long getLid() {
+        return lid;
+    }
 
 
-	public Book getBook() {
-		return book;
-	}
+    public void setLid(Long lid) {
+        this.lid = lid;
+    }
 
 
-	public void setBook(Book book) {
-		this.book = book;
-	}
+    public Book getBook() {
+        return book;
+    }
 
 
-	public Customer getCust() {
-		return cust;
-	}
+    public void setBook(Book book) {
+        this.book = book;
+    }
 
 
-	public void setCust(Customer cust) {
-		this.cust = cust;
-	}
+    public Customer getCust() {
+        return cust;
+    }
 
 
-	public String getDueDate() {
-		return dueDate;
-	}
+    public void setCust(Customer cust) {
+        this.cust = cust;
+    }
 
 
-	public void setDueDate(String dueDate) {
-		this.dueDate = dueDate;
-	}
+    public String getDueDate() {
+        return dueDate;
+    }
 
-}
+
+    public void setDueDate(String dueDate) {
+        this.dueDate = dueDate;
+    }
+
+}// End class

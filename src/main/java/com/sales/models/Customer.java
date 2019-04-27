@@ -14,55 +14,54 @@ import javax.validation.constraints.Min;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
-@Table(name="CUSTOMERS")
+@Table(name = "CUSTOMERS")
 public class Customer {
-	@Id
-	@GeneratedValue
-	@Column(name="CID")
-	private Long cId;
+    @Id
+    @GeneratedValue
+    @Column(name = "CID")
+    private Long cId;
 
-	@Column(name="CNAME")
-	@NotBlank
-	private String cName;
-	
-	
-	@Column(name="LOANPERIOD")
-	@Min(value=1)
-	private int loanPeriod;
-	
-	@OneToMany(mappedBy="cust")
-	private List<Loan> loans = new ArrayList<Loan>();
+    @Column(name = "CNAME")
+    @NotBlank
+    private String cName;
 
-	public Long getcId() {
-		return cId;
-	}
 
-	public void setcId(Long cId) {
-		this.cId = cId;
-	}
+    @Column(name = "LOANPERIOD")
+    @Min(value = 1)
+    private int loanPeriod;
 
-	public String getcName() {
-		return cName;
-	}
+    @OneToMany(mappedBy = "cust")
+    private List<Loan> loans = new ArrayList<Loan>();
 
-	public void setcName(String cName) {
-		this.cName = cName;
-	}
+    public Long getcId() {
+        return cId;
+    }
 
-	public int getLoanPeriod() {
-		return loanPeriod;
-	}
+    public void setcId(Long cId) {
+        this.cId = cId;
+    }
 
-	public void setLoanPeriod(int loanPeriod) {
-		this.loanPeriod = loanPeriod;
-	}
+    public String getcName() {
+        return cName;
+    }
 
-	public List<Loan> getLoans() {
-		return loans;
-	}
+    public void setcName(String cName) {
+        this.cName = cName;
+    }
 
-	public void setLoans(List<Loan> loans) {
-		this.loans = loans;
-	}
+    public int getLoanPeriod() {
+        return loanPeriod;
+    }
 
-}
+    public void setLoanPeriod(int loanPeriod) {
+        this.loanPeriod = loanPeriod;
+    }
+
+    public List<Loan> getLoans() {
+        return loans;
+    }
+
+    public void setLoans(List<Loan> loans) {
+        this.loans = loans;
+    }
+}// End class

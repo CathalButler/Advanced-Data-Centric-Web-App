@@ -1,33 +1,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1" %>
 <!DOCTYPE html>
 <html>
 
 <head>
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="/css/table.css">
     <meta charset="ISO-8859-1">
     <title>ADCWA Final Project</title>
 </head>
 <body>
-<h1>List of Books</h1>
-<table>
-    <tr>
-        <th>Book ID</th>
-        <th>Title</th>
-        <th>Author</th>
-    </tr>
-    <tr>
-        <c:forEach items="${books}" var="book">
-    <tr>
-        <td>${book.bid}</td>
-        <td>${book.title}</td>
-        <td>${book.author}</td>
-    </tr>
-    </c:forEach>
-    </tr>
-</table>
+<h1>Could not create New Loan</h1>
+
+<h2>${error}</h2>
+
+
 <a href="/">Home</a>
 <a href="/addBook">Add Book</a>
 <a href="/showCustomers">List Customers</a>

@@ -5,6 +5,8 @@
 <html>
 
 <head>
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/css/table.css">
     <meta charset="ISO-8859-1">
     <title>ADCWA Final Project</title>
 </head>

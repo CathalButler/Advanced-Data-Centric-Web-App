@@ -74,4 +74,4 @@ public class Book {
 		this.loans = loans;
 	}
 
-}
+}// End class

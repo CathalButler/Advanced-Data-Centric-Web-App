@@ -1,5 +1,6 @@
 package com.sales.services;
 
+import com.sales.exceptions.UserDefinedException;
 import com.sales.models.Loan;
 import com.sales.repositories.LoanRepoInterface;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +26,19 @@ public class LoanService {
         // Set the Due date to the loan object
         l.setDueDate(formattedDate);
         // Save the object to the database
-        li.save(l);
-
+        try {
+            li.save(l);
+        } catch (Exception e) {
+            // Already exists in the databases:
+            throw new UserDefinedException("Book: " + l.getBook().getBid() + "(" + l.getBook().getTitle() + ")" +
+                    "already on loan to Customer: " + l.getCust().getcId() + "(" + l.getCust().getcName() + ")");
+        }
 
     }// End save
+
+    public void deleteLoan(Loan l) {
+        li.delete(l);
+    }
 
     // Method to get all customers
     public Iterable<Loan> getLoans() {
