@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 @ControllerAdvice
 public class ExceptionController {
     // Logger for Spring console
-    private static final Logger logger = LoggerFactory.getLogger(MainController.class);
+    private static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
 
     /**
      * ExceptionHandler for UserDefinedException class
