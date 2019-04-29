@@ -13,7 +13,7 @@
 <form:form modelAttribute="loan" method="POST" acceptCharset="UTF-8">
     <h3>Delete Loan</h3>
     <td>Loan ID: <form:input path="lid"></form:input></td>
-    <td colspan="2"><input type="submit" value="Add" /></td>
+    <td colspan="2"><input type="submit" value="Delete" /></td>
 </form:form>
 
 <a href="/">Home</a>

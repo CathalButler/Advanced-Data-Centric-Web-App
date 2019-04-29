@@ -10,7 +10,7 @@
     <title>ADCWA Final Project</title>
 </head>
 <body>
-<h1>Could not create New Loan</h1>
+<h1>${error_heading}</h1>
 
 <h2>${error}</h2>
 

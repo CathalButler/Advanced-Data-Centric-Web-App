@@ -8,5 +8,6 @@ import org.springframework.data.repository.CrudRepository;
  */
 
 public interface LoanRepoInterface extends CrudRepository<Loan, Long> {
-
+    public Loan findLoanByCust_CIdAndBook_Bid(Long cid, Long bid);
+    void deleteLoanByLid(Long lid);
 }

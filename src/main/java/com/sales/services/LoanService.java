@@ -32,13 +32,22 @@ public class LoanService {
             // Already exists in the databases:
             throw new UserDefinedException("Book: " + l.getBook().getBid() + "(" + l.getBook().getTitle() + ")" +
                     "already on loan to Customer: " + l.getCust().getcId() + "(" + l.getCust().getcName() + ")");
-        }
-
+        }// End try catch
     }// End save
 
-    public void deleteLoan(Loan l) {
-        li.delete(l);
+    public Loan findLoanByCust_CId(Long cid, Long bid) {
+        return li.findLoanByCust_CIdAndBook_Bid(cid, bid);
     }
+
+    // Method to delete loan by loan id
+    public void deleteLoanByLid(Long lid) {
+        try {
+            li.delete(lid);
+        } catch (Exception e) {
+            // Already exists in the databases:
+            throw new UserDefinedException("No such Loan: " + lid);
+        }// End try catch
+    }// End deleteLoanByLid
 
     // Method to get all customers
     public Iterable<Loan> getLoans() {

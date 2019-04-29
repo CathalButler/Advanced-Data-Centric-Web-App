@@ -34,7 +34,7 @@ public class MainController {
 
     // == Book Methods ==============================================================
     /*
-    Method to add a book object
+    Method to create a book object
     Request mapping /addBook.
     Return addBook page
      */
@@ -119,11 +119,9 @@ public class MainController {
     public String getCustomers(Model m) {
         // List of book objects
         List<Customer> customers = (List<Customer>) customerService.getCustomers();
-
         // Create objects from model book and all to the array list
         m.addAttribute("customers", customers);
         //Create objects from model loan and add to the array list
-
         return "showCustomers";
     }// End getBooks method
 
@@ -187,7 +185,7 @@ public class MainController {
         if (result.hasErrors()) {
             return "newLoan"; //return to a new page if error
         } else {// End if
-            loanService.deleteLoan(loan);
+            loanService.deleteLoanByLid(loan.getLid());
             return "redirect:showLoans";
         }// End if else
     }// End method
